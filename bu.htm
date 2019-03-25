@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta charset="utf-8">
+        <title>醫護表單</title>
+    </head>
+
+    <body style="background-color:LightCyan">
+        <script language="JavaScript">
+            function checkdata() {
+                if (document.orderForm1.name.value == '')
+                {
+                    alert("姓名不得為空白");
+                    return (false);
+                }
+                if (document.orderForm1.number.value == '')
+                {
+                    alert("請輸入電話");
+                    return (false);
+                }
+                if (isNaN(document.orderForm1.number.value) == true)
+                {
+                    alert("電話必須為數字");
+                    return (false);
+                }
+                if (document.orderForm1.cellphone.value == '')
+                {
+                    alert("請輸入手機");
+                    return (false);
+                }
+                if (isNaN(document.orderForm1.cellphone.value) == true)
+                {
+                    alert("手機必須為數字");
+                    return (false);
+                }
+            }
+
+            function loadPatient()
+            {
+                var text = '{"name":"Chalmers", "number":12345678, "gender": "male", "cellphone": "0911-222-333"}';
+                obj = JSON.parse(text);
+                document.getElementById("name").value = obj.name;
+                document.getElementById("number").value = obj.number;
+                a=obj.gender;
+                if (a =="male"){document.getElementById("m").checked = true;}
+                if (a =="female"){document.getElementById("f").checked = true;}
+                 document.getElementById("cellphone").value = obj.cellphone;
+
+            }
+
+
+            function Button3onclick()
+            {
+                var a, b, c;
+                a = document.getElementById("name").value;
+                b = document.getElementById("number").value;
+                if (document.getElementById("m").checked)
+                {
+                    c = document.getElementById("m").value;
+                }
+                if (document.getElementById("f").checked)
+                {
+                    c = document.getElementById("f").value;
+                }
+                alert(a + b + c);
+            }
+        </script>
+
+        <form id="orderForm1" action="http://203.64.84.113/x/RQ_RS.aspx" method="post" name="orderForm1">
+            <h2>全責照護病患收案協談單</h2>
+
+            <h4>一、病患基本資料：</h4>
+            <div>
+                病患姓名：<input type="text" name="name" id="name" size="8">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                年齡：<input type="text" name="年齡" size="5">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                性別: <input type="radio" name="mf" id="m" value="男">男
+                <input type="radio" name="mf" id="f" value="女">女
+                <br><br>
+                家屬：<input type="text" name="家屬" size="8">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                與病患關係：<input type="text" name="與病患關係" size="8">
+                <br><br>
+                聯絡電話：<input type="text" name="number" id="number" size="10">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                手機：<input type="text" name="cellphone" id="cellphone" size="10">
+                <br><br>
+
+        <p><input type="button" value="檢查 button" onclick="checkdata();"></p>
+        <p><input type="button" value="loadPatient button" onclick="loadPatient();"></p>
+        <p><input type="button" value="getPatient button" onclick="Button3onclick();" /></p>
+        
+
+        </form>
+
+        </div>
+        <h4>二、家庭評估：</h4>
+        <div>
+            1.家中主要決策者：
+            姓名：<input type="text" name="姓名" size="8">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            與病患關係：<input type="text" name="與病患關係" size="8">
+            <br><br>
+            2.經濟來源：
+            <select id="selectID1" name="經濟來源">
+                <option value="自給" selected>自給
+                <option value=“子女”>子女
+                <option value=“親友”>親友
+                <option value=“社會福利”>社會福利
+                <option value=“其他”>其他
+            </select>
+            <br>
+            其他:<br><textarea name="其他"></textarea>
+            <br><br>
+        </div>
+        <h4>三、病患現況評估：</h4>
+        <div>
+            1.意識：
+            <select id="selectID2" name="1.意識">
+                <option value="清醒" selected>清醒
+                <option value="混亂">混亂
+                <option value="呆滯">呆滯
+                <option value="呻吟">呻吟
+                <option value="嗜睡">嗜睡
+                <option value="昏迷">昏迷
+            </select>
+            <br><br>
+            2.呼吸：
+            <select id=“selectID3” name="2.呼吸">
+                <option value="自行呼吸" selected>自行呼吸
+                <option value="偶需Ｏ２">偶需Ｏ２
+                <option value="偶需抽痰">偶需抽痰
+                <option value="氣切">氣切
+            </select>
+            <br><br>
+            3.進食：
+            <select id=“selectID4” name="3.進食">
+                <option value="自行進食" selected>自行進食
+                <option value="需餵食">需餵食
+                <option value="鼻胃管灌食">鼻胃管灌食
+                <option value="胃造口">胃造口
+            </select>
+            <br><br>
+            4.皮膚：
+            <select id=“selectID5” name="4.皮膚">
+                <option value="完整" selected>完整
+                <option value="有傷口">有傷口
+            </select>
+            <br><br>
+            5.行動：
+            <select id=“selectID6” name="5.行動">
+                <option value="活動自如" selected>活動自如
+                <option value="需人攙扶">需人攙扶
+                <option value="助行器">助行器
+                <option value="輪椅">輪椅
+                <option value="完全臥床">完全臥床
+            </select>
+            <br><br>
+        </div>
+        <h4>四、日常生活功能評估：</h4>
+        <div>
+            1.巴氏量表(Barthel Index)<input type="text" name="1.巴氏量表(Barthel Index)" size="5">分<br />
+            2.依賴程度：
+            <select id=“selectID7” name="2.依賴程度">
+                <option value="獨立" selected>獨立
+                <option value="輕度依賴">輕度依賴
+                <option value="中度依賴">中度依賴
+                <option value="嚴重依賴">嚴重依賴
+                <option value="完全依賴">完全依賴
+            </select>
+            <br><br>
+        </div>
+        <h4>五、所需生活照顧項目：</h4>
+        <div>
+            1.進食方面：
+            <select id="selectID8" name="1.進食方面">
+                <option value="協助被餐可以自己進食" selected>協助被餐可以自己進食
+                <option value="須餵食">須餵食
+                <option value="鼻胃管灌食">鼻胃管灌食
+            </select>
+            <br><br>
+            2.身體清潔：
+            <select id=“selectID9” name="2.身體清潔">
+                <option value="漱洗" selected>漱洗
+                <option value="身體清潔(擦澡、洗澡) ">身體清潔(擦澡、洗澡)
+                <option value="會陰沖洗">會陰沖洗
+            </select>
+            <br><br>
+            3.排泄方面：
+            <select id=“selectID10” name="3.排泄方面">
+                <option value="協助如廁" selected>協助如廁
+                <option value="更換尿布">更換尿布
+                <option value="存留導尿管">存留導尿管
+                <option value="膀胱造廔">膀胱造廔
+                <option value="腸造廔口">腸造廔口
+            </select>
+            <br><br>
+            4.活動方面：
+            <select id=“selectID11” name="4.活動方面">
+                <option value="協助上下床" selected>協助上下床
+                <option value="拍身翻背">拍身翻背
+                <option value="助行器">助行器
+                <option value="輪椅">輪椅
+                <option value="完全臥床">完全臥床
+            </select>
+            <br><br>
+            5.其他照顧：
+            <select id=“selectID12” name="5.其他照顧">
+                <option value="協助更衣褲" selected>協助更衣褲
+                <option value="需餵食">需餵食
+                <option value="鼻胃管灌食">鼻胃管灌食
+            </select>
+            <br><br>
+        </div>
+        <h4>六、協談後結果：</h4>
+        <div>
+            <input type="radio" name="協談後結果" value="符合收案照顧">符合收案照顧<br />
+            <input type="radio" name="協談後結果" value="不符合">不符合<br />
+            原因:<br><textarea name="原因"></textarea>
+
+            <br><br>
+        </div>
+        <h4>七、家屬由何處得知本照顧服務模式：</h4>
+        <div>
+            <input type="checkbox" name="醫院海報" value="醫院海報">醫院海報
+            <input type="checkbox" name="醫護人員介紹" value="醫護人員介紹">醫護人員介紹
+            <input type="checkbox" name="病友介紹" value="病友介紹">病友介紹<br>
+            其他:<br><textarea name="其他"></textarea><br>
+
+            <br><br>
+        </div>
+        <button type="submit" value="sssss" style="height: 29px; width: 103px">送出</button>
+        
+
+        </form>
+    </body>
+</html>
